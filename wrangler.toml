@@ -1,0 +1,21 @@
+name = "vehicle-rental-platform"
+main = "src/workers.js"
+compatibility_date = "2024-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+  binding = "DB"
+  database_name = "vehicle-rental-db"
+  database_id = "your-d1-database-id"
+
+[[kv_namespaces]]
+  binding = "SESSIONS"
+  id = "your-kv-namespace-id"
+
+[[r2_buckets]]
+  binding = "IMAGES"
+  bucket_name = "vehicle-rental-images"
+
+[durable_objects.bindings]
+  [durable_objects.bindings.AVAILABILITY]
+  class_name = "AvailabilityTracker"
