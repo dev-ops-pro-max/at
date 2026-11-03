@@ -1,1 +1,1 @@
-{"name":"vehicle-rental-platform","private":true,"type":"module","scripts":{"dev":"wrangler dev","deploy":"wrangler deploy"}}
+{"name":"amaravathi-travels","version":"1.0.0","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","test":"node --test","check":"node --check src/worker.js && node --check public/booking.js && node --check public/admin.js","dev":"node scripts/dev.mjs"}}

@@ -1,0 +1,35 @@
+{
+  "name": "amaravathi-travels-platform",
+  "main": "dist/worker.mjs",
+  "compatibility_date": "2026-11-03",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": false,
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "amaravathi-travels",
+      "database_id": "3475acc6-ea8d-4b83-9ba6-9307268d00e0",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "vars": {
+    "ACCESS_AUD": "02727bdf5adce9fc08232023c27853a2887a2edbc881ac05df85e1c4d7488115",
+    "TURNSTILE_SITEKEY": "0x4AAAAAAFyKToUV_H0ts3xh"
+  },
+  "routes": [
+    {
+      "pattern": "amaravathitravels.com",
+      "custom_domain": true
+    }
+  ],
+  "triggers": {
+    "crons": [
+      "15 2 * * *"
+    ]
+  }
+}
