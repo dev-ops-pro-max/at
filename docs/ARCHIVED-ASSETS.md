@@ -9,3 +9,14 @@ Original image URLs were extracted from that archived HTML. The old Zyro host no
 - `archived-traveller.jpg`: example Traveller from the earlier site (612 × 464). Original filename: amaravathi-tours-weekend-tempo-traveller-AQEDxVrbG3UQQN0g.jpg.
 
 These images establish what appeared on the owner's old website, not current fleet ownership or availability. The UI labels them as earlier website examples and requires vehicle confirmation. No competitor-branded image was imported. Replace with current owner-approved fleet photos when available. The Drive folder supplied for that purpose awaits a confirmed Google Drive connection.
+
+## Owner-supplied Drive photos (November 2026 refresh)
+Photos were retrieved through the connected Google Drive folder explicitly supplied by the owner. No public sharing permissions were changed. Selected photographs were inspected before use; one truncated source was skipped. Public site use was authorized by the owner's instruction to use these photos.
+
+- chennai-sedan.jpg: PHOTO-2025-02-14-19-55-16.jpg (Drive file 1z0oVh-BhU0ZjVavbQkCsZtedB2jkUc1I).
+- chennai-traveller.jpg: PHOTO-2025-02-14-19-55-19.jpg (Drive file 1e1eQ-tpsW5znJoYwyRWVnw8eLsZd56Bc).
+- car-interior.jpg: PHOTO-2025-02-14-19-55-15.jpg (Drive file 1P2PAUjA4l__FEM0efDA2rHGjaE0lWoRv).
+- traveller-seats.jpg: PHOTO-2025-02-14-19-55-17.jpg (Drive file 17pK_tIeUIQMqrkajmws78IcGB2oeM5GY).
+- traveller-interior.jpg: PHOTO-2025-02-14-19-55-17.jpg (Drive file 1nSrAnc7NxY1oTFi23iM5Sr081L6mISDE).
+
+The recovered purple wordmark remains unchanged. The surrounding visual system now uses dark green, red and warm yellow, following the owner's description of the visiting card. These are a design interpretation, not an exact match to an unseen card. Photographs do not establish vehicle availability or amenities for any individual booking.
