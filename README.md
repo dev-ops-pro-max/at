@@ -28,3 +28,6 @@ See docs/OPERATIONS.md and docs/ARCHITECTURE.md. CI runs on pushes and PRs. The 
 
 ## Business content
 Rates remain “Quote on request”; category illustrations are explicitly labelled. No claimed customer logos, testimonials, fleet counts, instant availability, GPS tracking or online payment. Confirm business tariffs, actual service coverage, fleet photographs and booking terms before publishing those details. The Android privacy policy remains separate and needs the app's actual data practices.
+
+## Android app support site
+`node scripts/build-app-support.mjs` builds the separate `dist/app-support.mjs` Worker for `app.amaravathitravels.com` (Cloudflare Worker `amaravathi-android-app`). It reuses the main site's styles, provides Support/Help/Contact pages and links to the main enquiry forms. The Android privacy page remains an explicit unfinished status page until actual app data practices are supplied; do not use it as the final Google Play policy. This Worker is deployed independently from the main production deploy workflow.
