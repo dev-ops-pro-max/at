@@ -20,3 +20,8 @@ Photos were retrieved through the connected Google Drive folder explicitly suppl
 - traveller-interior.jpg: PHOTO-2025-02-14-19-55-17.jpg (Drive file 1nSrAnc7NxY1oTFi23iM5Sr081L6mISDE).
 
 The recovered purple wordmark remains unchanged. The surrounding visual system now uses dark green, red and warm yellow, following the owner's description of the visiting card. These are a design interpretation, not an exact match to an unseen card. Photographs do not establish vehicle availability or amenities for any individual booking.
+
+## Original favicon and unified logo palette
+Recovered the original 48 × 48 white AT on purple favicon from the same February 2025 page's `rel=icon` URL (android-chrome-512x512-ALp7e201x3Fa7wyw.png). It is served as `/favicon.png` with `/favicon.ico` compatibility on both domains. Both sites link it with a version query to refresh browser caches.
+
+Following owner feedback, the visiting-card-inspired green/red/yellow palette was replaced with a unified violet, deep indigo, white and lavender system matched to the recovered logo. Typography, cards, navigation, photo framing and booking form placement were revised together. The original logo and favicon pixels remain unchanged.

@@ -11,5 +11,7 @@ jobs:
         with:
           node-version: '24'
       - run: npm run build
+      - run: node scripts/build-app-support.mjs
+      - run: node --check dist/app-support.mjs
       - run: npm run check
       - run: npm test
