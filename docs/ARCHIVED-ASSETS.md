@@ -25,3 +25,6 @@ The recovered purple wordmark remains unchanged. The surrounding visual system n
 Recovered the original 48 × 48 white AT on purple favicon from the same February 2025 page's `rel=icon` URL (android-chrome-512x512-ALp7e201x3Fa7wyw.png). It is served as `/favicon.png` with `/favicon.ico` compatibility on both domains. Both sites link it with a version query to refresh browser caches.
 
 Following owner feedback, the visiting-card-inspired green/red/yellow palette was replaced with a unified violet, deep indigo, white and lavender system matched to the recovered logo. Typography, cards, navigation, photo framing and booking form placement were revised together. The original logo and favicon pixels remain unchanged.
+
+## Coordinated vector brand refresh
+The owner authorized enhancing the logo and favicon to suit the website. `images/at-brand.svg` is the new vector wordmark and AT monogram; `images/at-mark.svg` is its icon. The PNG favicon is a raster rendering of the same polygon geometry. Original recovered brand files remain in source for reference. The site now pairs this purple identity with larger text, clearer form labels, required-field guidance, touch-friendly controls, and a direct rental quotation CTA. The Android site uses the matching vector wordmark and favicon and remains app-only.
