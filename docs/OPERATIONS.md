@@ -28,9 +28,11 @@ A daily 02:15 UTC cron deletes enquiries and audit logs older than 180 days by l
 5. For a faulty release redeploy a tested commit or restore the previous domain mapping. Document trigger, impact, timeline and corrective changes in an incident report.
 
 ## Smoke monitoring
-CI can run scripts/smoke.mjs manually or after deployment. No recurring external monitor or notification has been activated. To add it, select the monitoring cadence and notification destination; account for GitHub Actions allowance. Keep admin data out of uptime probes.
+CI can run scripts/smoke.mjs manually or after deployment. Cloudflare Worker issue, certificate and DDoS email notifications are configured; the Worker issue delivery test returned success. No recurring external uptime probe has been activated. To add it, select the monitoring cadence and notification destination; account for GitHub Actions allowance. Keep admin data out of uptime probes.
 
 ## Link previews and www
 Both public sites expose Open Graph metadata and a 1200 × 630 JPEG without authentication. Run `node scripts/check-social.mjs` after changing sharing metadata. This checks the public server response, not the state of WhatsApp's cache or a user's preview privacy settings.
 
 The `www.amaravathitravels.com/*` zone route invokes Worker `amaravathi-www-redirect`, whose source is `src/www-redirect.js`. It returns a 308 redirect to the HTTPS apex, preserving path and query. The existing proxied www CNAME remains in place. This small Worker is independent from the main deployment workflow. Restore/delete its zone route to roll back the www behavior without affecting apex or app routing.
+
+Security controls, recovery exercise evidence and remaining owner prerequisites are recorded in SECURITY-CHECKS.md.
