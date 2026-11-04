@@ -29,3 +29,8 @@ A daily 02:15 UTC cron deletes enquiries and audit logs older than 180 days by l
 
 ## Smoke monitoring
 CI can run scripts/smoke.mjs manually or after deployment. No recurring external monitor or notification has been activated. To add it, select the monitoring cadence and notification destination; account for GitHub Actions allowance. Keep admin data out of uptime probes.
+
+## Link previews and www
+Both public sites expose Open Graph metadata and a 1200 × 630 JPEG without authentication. Run `node scripts/check-social.mjs` after changing sharing metadata. This checks the public server response, not the state of WhatsApp's cache or a user's preview privacy settings.
+
+The `www.amaravathitravels.com/*` zone route invokes Worker `amaravathi-www-redirect`, whose source is `src/www-redirect.js`. It returns a 308 redirect to the HTTPS apex, preserving path and query. The existing proxied www CNAME remains in place. This small Worker is independent from the main deployment workflow. Restore/delete its zone route to roll back the www behavior without affecting apex or app routing.
