@@ -346,3 +346,18 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;background:var(--cream)}.topb
  .floating-wa{display:flex;align-items:center;justify-content:center;gap:9px;width:auto;height:auto;min-width:0;min-height:48px;padding:12px 17px;border-radius:999px;white-space:nowrap;line-height:1.2}
  .floating-wa svg{display:block;width:22px;height:22px;flex:0 0 22px}
 }
+
+/* Keep service labels spacious while the chooser stays compact on phones. */
+@media(max-width:700px){
+ .mobile-choices{display:flex;flex-direction:column;gap:8px}
+ .mobile-choices-heading{margin-bottom:1px}
+ .mobile-panel{flex:0 0 auto;width:100%}
+ .mobile-panel>summary{min-height:58px;align-items:center;gap:11px;padding:9px 13px}
+ .panel-icon{flex-basis:34px;width:34px;height:34px}
+ .panel-copy{padding:0;gap:2px}
+ .panel-copy strong{font-size:14px;line-height:1.25}
+ .panel-copy small{font-size:11px;line-height:1.35}
+ .mobile-panel>summary>b{flex-basis:27px;width:27px;height:27px}
+ .mobile-panel[open]{flex-basis:auto}
+ .mobile-panel[open]>summary{min-height:58px;align-items:center;padding-inline:13px}
+}
