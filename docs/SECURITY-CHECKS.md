@@ -31,7 +31,7 @@ The separate Android app Worker had query-string redaction disabled in observabi
 
 The Worker-backed apex and app hosts do not require a traditional origin connection; the other proxied hostnames include a Cloudflare Tunnel. The zone SSL mode was Flexible, so that mode was left unchanged until the Tunnel origin path is independently checked. Cloudflare's zone security level was `essentially_off`; WAF was off. These can affect which visitor requests are challenged or blocked, so they remain for a rule-impact review rather than a blind toggle.
 
-Mobile rendering was inspected at an iPhone 14 CSS viewport (390 × 844). Corporate and Driver Partners content now stacks, each form uses the available mobile width, and its fields use one column. The corporate submit label stays on one line. The fixed WhatsApp control becomes a compact, labelled icon so it covers less of the page while scrolling. The Sedan, SUV/MUV and Van/Traveller cards loaded their expected car/interior/Traveller images; no image or request was broken in the inspected cards.
+Mobile rendering was inspected at an iPhone 14 CSS viewport (390 × 844). Corporate and Driver Partners content now stacks, each form uses the available mobile width, and its fields use one column. The corporate submit label stays on one line. The fixed WhatsApp control becomes a compact, labelled icon so it covers less of the page while scrolling. The Driver Partners badge retains its circular shape and consent checkboxes align beside their text. The Sedan, SUV/MUV and Van/Traveller cards loaded their expected car/interior/Traveller images; no image or request was broken in the inspected cards.
 
 ## Recovery and rollback
 
