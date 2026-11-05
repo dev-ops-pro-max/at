@@ -308,3 +308,10 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;background:var(--cream)}.topb
  .contact-band .wrap{width:calc(100% - 28px);flex-wrap:wrap}
 }
 @media(prefers-reduced-motion:reduce){.mobile-panel>summary>b{transition:none}}
+
+@media(max-width:700px){
+ .consent span{flex:1;min-width:0;line-height:1.65}
+ body:has(#booking-panel[open]) .floating-wa,
+ body:has(#corporate-panel[open]) .floating-wa,
+ body:has(#partners-panel[open]) .floating-wa{display:none}
+}
