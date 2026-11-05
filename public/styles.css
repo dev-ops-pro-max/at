@@ -341,10 +341,11 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;background:var(--cream)}.topb
  .mobile-panel>section{padding:16px 13px 18px}
 }
 
-/* Keep the desktop WhatsApp action at normal button scale. */
+/* Match the compact icon-only WhatsApp control across desktop and mobile. */
 @media(min-width:701px){
- .floating-wa{display:flex;align-items:center;justify-content:center;gap:9px;width:auto;height:auto;min-width:0;min-height:48px;padding:12px 17px;border-radius:999px;white-space:nowrap;line-height:1.2}
- .floating-wa svg{display:block;width:22px;height:22px;flex:0 0 22px}
+ .floating-wa{display:flex;align-items:center;justify-content:center;width:48px;height:48px;min-width:48px;min-height:48px;aspect-ratio:1;padding:0;border-radius:50%;font-size:0}
+ .floating-wa-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+ .floating-wa svg{display:block;width:24px;height:24px;flex:none}
 }
 
 /* Keep service labels spacious while the chooser stays compact on phones. */
