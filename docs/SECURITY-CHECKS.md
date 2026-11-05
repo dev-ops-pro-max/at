@@ -17,11 +17,21 @@ All 13 repository tests passed, covering bot validation, origin rejection, staff
 
 Cloudflare notification policies were configured for Worker issues, certificate events and DDoS events to the verified account-owner email. The Worker issue policy test API returned success; inbox receipt requires owner confirmation.
 
-## Owner actions still required
+## Scope decisions and remaining checks
 
-Cloudflare reports the owner has no MFA enrolled. Enroll a passkey or authenticator and securely retain recovery codes before enforcing account-wide MFA. Staff currently authenticate by emailed one-time PIN; an independent MFA method/identity provider must be enrolled before changing the Access requirement. Do not enable an unsupported requirement that locks out the only staff identity.
+The owner has explicitly excluded MFA and email-related work from this review. Staff sign-in was verified in another conversation; no MFA policy or email configuration change is pending here. The user reported two staff members share access, so this review did not broaden the Access allow policy.
 
-An authenticated browser session is required to finish live dashboard sign-in, edit, export and session-expiry checks. Never add a bypass or use production customer records as synthetic test fixtures.
+The authenticated staff edit, CSV export and session-expiry workflows were not re-tested in this pass. Do not use production customer records as synthetic test fixtures.
+
+## 5 November 2026 recheck
+
+At the start of this recheck, the production zone still had its minimum TLS version set to 1.0 and the zone-level Always Use HTTPS control off. Both are now enabled: the zone enforces HTTPS and the minimum TLS version is 1.2. The Worker had already been redirecting HTTP requests to HTTPS, so this adds a zone-level safeguard. Current iPhones, including iPhone 14, support TLS 1.2.
+
+The separate Android app Worker had query-string redaction disabled in observability. Redaction is now enabled; this changes logs and traces only, not app request handling.
+
+The Worker-backed apex and app hosts do not require a traditional origin connection; the other proxied hostnames include a Cloudflare Tunnel. The zone SSL mode was Flexible, so that mode was left unchanged until the Tunnel origin path is independently checked. Cloudflare's zone security level was `essentially_off`; WAF was off. These can affect which visitor requests are challenged or blocked, so they remain for a rule-impact review rather than a blind toggle.
+
+Mobile rendering was inspected at an iPhone 14 CSS viewport (390 × 844). Corporate and Driver Partners content now stacks, each form uses the available mobile width, and its fields use one column. The corporate submit label stays on one line. The fixed WhatsApp control becomes a compact, labelled icon so it covers less of the page while scrolling. The Sedan, SUV/MUV and Van/Traveller cards loaded their expected car/interior/Traveller images; no image or request was broken in the inspected cards.
 
 ## Recovery and rollback
 
