@@ -165,3 +165,34 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;background:var(--cream)}.topb
  .contact-band .contact-number{font-size:21px}
 }
 @media(prefers-reduced-motion:reduce){.disclosure-icon{transition:none}}
+
+/* Fold the two secondary long forms until a visitor chooses that enquiry path. */
+.enquiry-disclosure{border:1px solid #d8cde4;border-radius:12px;background:#fff;overflow:hidden}
+.enquiry-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:58px;padding:12px 15px;cursor:pointer;color:#4e3c6b;font-size:13px;font-weight:650;list-style:none}
+.enquiry-disclosure>summary::-webkit-details-marker{display:none}
+.enquiry-disclosure>summary b{display:grid;place-items:center;flex:none;width:30px;height:30px;border-radius:50%;background:#eeebf7;color:var(--red);font-size:19px;transition:transform .2s ease}
+.enquiry-disclosure[open]>summary b{transform:rotate(45deg)}
+.enquiry-disclosure[open]>form{border-top:1px solid var(--line)}
+.partners .enquiry-disclosure{margin-top:14px}
+@media(max-width:700px){
+ .premium-hero{padding:24px 16px 60px;gap:13px}
+ .premium-hero h1{font-size:44px;line-height:1.02;margin:12px 0}
+ .premium-hero .eyebrow{margin-bottom:8px}
+ .premium-hero .intro{font-size:13px;line-height:1.5;margin:8px 0}
+ .premium-hero .hero-note,.premium-hero .hero-footnote{display:none}
+ .hero-actions{margin-block:10px 4px;gap:10px}
+ .hero-primary{min-height:42px;padding:10px 13px;font-size:11px}
+ .hero-secondary{min-height:40px;font-size:10px}
+ .premium-hero .hero-photo{height:148px;border-width:2px}
+ .photo-label{top:-9px;right:10px;padding:7px 9px}
+ .photo-label .label-mark{font-size:18px}
+ .journey-card{left:8px;bottom:20px;min-width:185px;padding:10px 12px;gap:9px}
+ .journey-card strong{font-size:12px}
+ .journey-card small{font-size:6px}
+ .route-marker{width:25px;height:25px;font-size:17px}
+ .premium-hero .art-caption{font-size:6px!important;padding-top:5px}
+ .enquiry-disclosure>summary{min-height:54px;padding:10px 12px;font-size:13px}
+ .partners .enquiry-disclosure{margin-top:11px}
+ .enquiry-disclosure[open] form{padding:15px 12px}
+}
+@media(prefers-reduced-motion:reduce){.enquiry-disclosure>summary b{transition:none}}
