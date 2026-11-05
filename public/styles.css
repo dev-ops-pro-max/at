@@ -315,3 +315,34 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;background:var(--cream)}.topb
  body:has(#corporate-panel[open]) .floating-wa,
  body:has(#partners-panel[open]) .floating-wa{display:none}
 }
+
+
+/* Make the phone entry point feel like a compact service chooser. */
+.mobile-choices{display:contents}
+.mobile-choices-heading{display:none}
+@media(max-width:700px){
+ .header nav{display:none}
+ .header{min-height:64px;justify-content:center}
+ .mobile-choices{width:calc(100% - 24px);margin:0 auto 22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:9px}
+ .mobile-choices-heading{grid-column:1/-1;display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:0 2px 3px;color:#34264b}
+ .mobile-choices-heading strong{font-size:16px;font-weight:700}
+ .mobile-choices-heading span{font-size:11px;color:#82728f}
+ .mobile-panel{width:auto;margin:0;min-width:0;border-radius:14px;box-shadow:0 3px 14px #47306408}
+ .mobile-panel>summary{min-height:93px;align-items:flex-start;gap:9px;padding:13px 10px}
+ .panel-icon{flex-basis:34px;width:34px;height:34px;border-radius:11px;font-size:15px}
+ .panel-copy{padding-top:1px;gap:4px}
+ .panel-copy strong{font-size:13px;line-height:1.25}
+ .panel-copy small{font-size:10px;line-height:1.35}
+ .mobile-panel>summary>b{flex-basis:25px;width:25px;height:25px;font-size:17px}
+ .mobile-panel[open]{grid-column:1/-1}
+ .mobile-panel[open]>summary{min-height:65px;align-items:center;padding-inline:14px}
+ .mobile-panel[open]>summary .panel-copy strong{font-size:14px}
+ .mobile-panel[open]>summary .panel-copy small{font-size:11px}
+ .mobile-panel>section{padding:16px 13px 18px}
+}
+
+/* Keep the desktop WhatsApp action at normal button scale. */
+@media(min-width:701px){
+ .floating-wa{display:flex;align-items:center;justify-content:center;gap:9px;width:auto;height:auto;min-width:0;min-height:48px;padding:12px 17px;border-radius:999px;white-space:nowrap;line-height:1.2}
+ .floating-wa svg{display:block;width:22px;height:22px;flex:0 0 22px}
+}
