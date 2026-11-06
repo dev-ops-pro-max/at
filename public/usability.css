@@ -119,3 +119,6 @@ footer p{font-size:13px}
  body:has(.mobile-panel[open]) .floating-wa{display:none}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+.contact-band .contact-whatsapp{font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:5px}
+@media(max-width:700px){body.service-menu-visible .floating-wa{display:none}}

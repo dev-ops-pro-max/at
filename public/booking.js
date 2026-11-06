@@ -9,6 +9,11 @@ document.getElementById('close-dialog')?.addEventListener('click',()=>dialog.clo
 const forms=[...document.querySelectorAll('[data-enquiry-kind]')];
 const mobilePanels=[...document.querySelectorAll('details.mobile-panel')];
 const mobileLayout=window.matchMedia('(max-width:700px)');
+const chooser=document.querySelector('.mobile-choices');
+if(chooser&&'IntersectionObserver' in window){
+ const observer=new IntersectionObserver(([entry])=>document.body.classList.toggle('service-menu-visible',entry.isIntersecting));
+ observer.observe(chooser);
+}
 function openPanel(panel){
  if(!panel||!mobileLayout.matches)return;
  for(const other of mobilePanels)other.open=other===panel;
