@@ -1,0 +1,121 @@
+/* Homepage usability refinements. Keep the established purple palette. */
+body{--muted:#625a70}
+.mobile-call{display:none}
+.skip-link{position:fixed;top:8px;left:8px;z-index:100;background:#fff;color:#302151;padding:12px 18px;border-radius:8px;transform:translateY(-150%)}
+.skip-link:focus{transform:translateY(0)}
+.header nav a{min-height:44px;display:inline-flex;align-items:center}
+.header nav a:hover,.footer-links a:hover{color:#5334b5;text-decoration:underline;text-underline-offset:5px}
+.section-heading>p,.vehicle-body>p,.package>p,.partners p:not(.eyebrow):not(.fine-print){font-size:15px;line-height:1.6;color:var(--muted)}
+.specs,.fine-print,.package-detail,.form-note,.corporate-form small,.footer-bottom{font-size:12px;line-height:1.65;color:var(--muted)}
+.booking-fields label,.customer-fields label,.corporate-form label,#partner-form>label{font-size:13px;letter-spacing:0}
+.booking-instruction{font-size:14px;color:var(--muted)}
+.booking-human{color:var(--muted);font-size:12px}
+.trip-tabs label{min-width:0}
+.trip-tabs input{width:1px;height:1px;min-height:0;margin:0;padding:0;clip-path:inset(50%)}
+.consent{display:flex;align-items:flex-start;gap:10px;font-size:13px;font-weight:400;letter-spacing:0;line-height:1.6;color:#53495f}
+.consent input[type=checkbox]{flex:0 0 20px;width:20px;height:20px;min-height:20px;margin:2px 0 0}
+.consent span{min-width:0;flex:1}
+.consent a{text-underline-offset:3px}
+.submit-status:empty{display:none}
+.submit-status:not(:empty){margin:10px 0;padding:10px 12px;background:#f1edfa;border-radius:8px;font-size:14px}
+.turnstile{margin:12px 0;min-height:65px}
+.trip-submit-row{margin-top:14px;padding-top:16px}
+.corporate-panel{align-items:start;gap:32px}
+.corporate-panel>div>p{font-size:15px;color:#e0d7ef}
+.corporate-panel small{font-size:12px;color:#e0d7ef}
+.corporate-panel .corridors span{font-size:12px;border-color:#ffffff55;color:#eee7f9}
+.corporate-form small{color:var(--muted)}
+.corporate-form .two-col{gap:12px}
+.corporate-form input,.corporate-form select,.corporate-form textarea{font-size:16px}
+.corporate-form h3{font-size:24px}
+.partner-badge{font-family:inherit;transform:none;color:#4a3370;background:#ede7fb}
+.partner-badge [lang=ta]{font-size:30px;font-weight:600;line-height:1.6;letter-spacing:0}
+.partner-badge small{font-size:10px;color:#625375;letter-spacing:.08em}
+.fleet-grid{align-items:stretch}
+.vehicle{display:flex;flex-direction:column}
+.vehicle[hidden]{display:none}
+.vehicle-body{display:flex;flex:1;flex-direction:column}
+.card-bottom{margin-top:auto}
+.vehicle-art.suv{height:245px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(145deg,#eee9fa,#ded5ef);padding:18px 20px}
+.vehicle-art.suv>span{font-size:11px;letter-spacing:.08em;color:#5d4b76}
+.vehicle-art.suv svg{height:170px;width:100%;fill:#b6a2d7;stroke:#493361;stroke-width:2}
+.vehicle-art.suv .glass{fill:#6d5b88}
+.vehicle-art.suv .wheel{fill:#f8f5fc}
+.filter{min-height:44px;font-size:13px}
+.card-bottom button,.package button{min-height:44px;padding:10px 14px;border-radius:9px;color:#5436b1;background:#eee8fb}
+.card-bottom button:hover,.package button:hover{background:#dfd4f6}
+.compact-faq>details{padding:0;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+.compact-faq>details>summary{padding:16px 20px;min-height:76px;font-size:16px}
+.compact-faq>details>summary small{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-top:3px}
+.compact-faq>details[open]>summary>.disclosure-icon{transform:rotate(45deg)}
+.compact-faq .faq-answers{padding:0 20px 12px}
+.faq-answers summary,.tariff-note summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:48px;font-size:14px}
+.faq-answers summary::-webkit-details-marker,.tariff-note summary::-webkit-details-marker{display:none}
+.faq-answers summary:after,.tariff-note summary:after{content:'+';font-size:22px;color:#6543bf;flex:none}
+.faq-answers details[open]>summary:after,.tariff-note[open]>summary:after{content:'−'}
+.faq-answers p,.tariff-note p{font-size:14px;line-height:1.7;color:var(--muted)}
+.footer-links{font-size:13px;gap:8px 18px}
+.footer-links a{min-height:44px;display:inline-flex;align-items:center;text-underline-offset:4px}
+footer p{font-size:13px}
+.contact-band a{min-height:44px;display:flex;align-items:center;overflow-wrap:anywhere}
+.primary:focus-visible,.hero-primary:focus-visible{outline-color:#3c206a}
+@media(min-width:701px){
+ .mobile-panel{padding:0;border:0}
+ .corporate-panel h2{font-size:clamp(30px,3vw,40px)}
+ .corporate-form{padding:24px}
+ .corporate-form label{margin:8px 0}
+ .partners{grid-template-columns:174px minmax(0,1fr);gap:34px}
+ .section{padding-block:36px}
+ .partners.section{padding-block:12px 32px}
+}
+@media(max-width:700px){
+ .topbar .wrap{justify-content:center;padding-block:5px;font-size:11px}
+ .topbar .wrap>a{display:none}
+ .header:has(.original-logo){flex-direction:row;justify-content:space-between;align-items:center;min-height:66px;padding:8px 4px;gap:12px}
+ .header .original-logo{width:164px;height:44px}
+ .header nav,.header-cta{display:none}
+ .mobile-call{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 13px;border:1px solid #d8cee9;border-radius:24px;font-size:12px;font-weight:600;text-decoration:none;color:#4d337a;white-space:nowrap}
+ .premium-hero{gap:12px;margin-top:0;padding:14px 16px 16px}
+ .premium-hero .hero-photo{height:150px;object-position:center 55%}
+ .premium-hero .art-caption{display:none}
+ .premium-hero .eyebrow{font-size:10px;line-height:1.5;letter-spacing:.08em}
+ .premium-hero h1{font-size:clamp(36px,10.5vw,43px);line-height:1.08}
+ .premium-hero .intro{font-size:15px;line-height:1.55}
+ .hero-actions{gap:12px;margin:16px 0 0}
+ .hero-primary{font-size:13px;min-height:48px;padding-inline:14px}
+ .hero-secondary{font-size:12px;min-height:44px}
+ .mobile-choices-heading{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:2px 2px 6px}
+ .mobile-choices-heading strong{font-size:17px}
+ .mobile-choices-heading span{font-size:12px;color:var(--muted)}
+ .mobile-panel{padding:0}
+ .mobile-panel>summary,.mobile-panel[open]>summary{min-height:76px;padding:12px 14px;gap:12px}
+ .panel-copy strong,.mobile-panel[open]>summary .panel-copy strong{font-size:15px;line-height:1.3}
+ .panel-copy small,.mobile-panel[open]>summary .panel-copy small{font-size:12px;line-height:1.45;color:var(--muted)}
+ .panel-icon{width:38px;height:38px;flex-basis:38px}
+ .panel-copy{flex:1;min-width:0}
+ .mobile-panel[open]>summary{background:#f4f0fb}
+ #booking .booking-human{display:none}
+ .booking-instruction{font-size:14px}
+ .trip-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .trip-tabs span{padding:11px 3px;text-align:center;font-size:12px;white-space:nowrap}
+ .filter-row{flex-wrap:wrap;gap:7px}
+ .filter{font-size:12px;padding-inline:11px}
+ #corporate .corporate-panel{padding:20px 12px}
+ #corporate .corporate-panel>div>p{font-size:14px}
+ #corporate .corporate-form{padding:18px 14px}
+ #corporate .corporate-form .two-col{grid-template-columns:1fr;gap:0}
+ #corporate .corporate-form .consent{font-size:12px;line-height:1.65}
+ #partners .partner-badge{display:none}
+ .vehicle-art.suv{height:220px}
+ .specs,.fine-print,.form-note{font-size:12px}
+ .compact-faq>details>summary{font-size:15px;padding:14px;gap:12px}
+ .compact-faq .faq-answers{padding-inline:14px}
+ .contact-band h2{font-size:30px}
+ .contact-band .contact-number{font-size:25px}
+ footer{padding-top:26px;gap:18px;padding-bottom:70px}
+ .footer-links{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+ .footer-links a{font-size:13px;line-height:1.5}
+ .footer-bottom{font-size:12px;padding-top:16px;gap:8px}
+ body:has(.mobile-panel[open]) .floating-wa{display:none}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}

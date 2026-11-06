@@ -1,0 +1,3 @@
+/* Noto Sans Tamil, SIL OFL 1.1; license: /noto-tamil-license.txt */
+@font-face{font-family:"AT Tamil";src:url("/fonts/at-tamil.woff") format("woff");font-display:swap;font-weight:600}
+[lang="ta"]{font-family:"AT Tamil","Nirmala UI","Tamil Sangam MN",sans-serif}
