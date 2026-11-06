@@ -27,6 +27,11 @@ if(form){
  form.addEventListener('invalid',e=>{const panel=e.target.closest('.booking-step');if(panel)show(Number(panel.dataset.step));},true);
  form.addEventListener('submit',e=>{if(active<2){e.preventDefault();e.stopImmediatePropagation();next.click();}},true);
  document.querySelectorAll('[data-enquire]').forEach(button=>button.addEventListener('click',()=>{show(0);if(button.closest('.vehicle')){form.elements.destination.value='';const choice=[...form.elements.vehicle.options].find(o=>o.value===button.dataset.enquire);if(choice)form.elements.vehicle.value=choice.value;}}));
+ const review=document.createElement('div');review.className='booking-review';review.setAttribute('aria-live','polite');panels[2].prepend(review);
+ function updateReview(){review.replaceChildren();const title=document.createElement('h3');title.textContent='Review your journey';review.append(title);for(const [label,value] of [['Trip',form.elements.service.value],['Pickup',form.elements.pickup.value],['Destination',form.elements.destination.value],['Date',form.elements.date.value],['Passengers',form.elements.passengers.value],['Vehicle',form.elements.vehicle.value]]){const row=document.createElement('p');const strong=document.createElement('strong');strong.textContent=label+': ';row.append(strong,document.createTextNode(value||'To be confirmed'));review.append(row);}}
+ next.addEventListener('click',updateReview);form.addEventListener('input',updateReview);
+ function localDestination(){const local=form.elements.service.value==='Local rental';form.elements.destination.placeholder=local?'Area or itinerary within Chennai':'Where to?';if(local&&!form.elements.destination.value)form.elements.destination.value='Chennai local rental';else if(!local&&form.elements.destination.value==='Chennai local rental')form.elements.destination.value='';}
+ form.querySelectorAll('[name=service]').forEach(r=>r.addEventListener('change',localDestination));localDestination();
  show(0);
 }
 const hero=document.querySelector('.premium-hero');
