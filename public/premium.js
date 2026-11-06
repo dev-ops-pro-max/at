@@ -1,3 +1,4 @@
+document.querySelectorAll('.vehicle').forEach(card=>{if(card.querySelector('h3')?.textContent.trim()==='SUV / MUV')card.remove();});
 const form=document.getElementById('trip-form');
 if(form){
  const fields=form.querySelector('.booking-fields');
