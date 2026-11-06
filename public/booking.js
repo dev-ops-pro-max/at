@@ -1,5 +1,5 @@
 export function whatsappUrl(message){return 'https://wa.me/919940263719?text='+encodeURIComponent(message);}
-export function tripMessage(data){return `Trip type: ${data.service}\nPickup: ${data.pickup}\nDestination: ${data.destination}\nTravel date: ${data.date}\nPassengers: ${data.passengers}`;}
+export function tripMessage(data){return `Trip type: ${data.service}\nPickup: ${data.pickup}\nDestination: ${data.destination}\nTravel date: ${data.date}\nPassengers: ${data.passengers}\nVehicle preference: ${data.vehicle||"Any suitable vehicle"}`;}
 export function corporateMessage(data){return `Company: ${data.company}\nContact: ${data.contact}\nTeam size: ${data.team}\nRequirement: ${data.requirement}\nRoutes and timings: ${data.details}`;}
 if(typeof document!=='undefined'){
 const date=document.querySelector('input[name="date"]');if(date){const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const get=t=>parts.find(p=>p.type===t).value;date.min=`${get('year')}-${get('month')}-${get('day')}`;}
