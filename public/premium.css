@@ -59,3 +59,6 @@
 /* Lighthouse contrast corrections: retain the purple palette on light surfaces. */
 .booking-kicker,.section-heading .eyebrow,.section-heading h2 em,.package .tag{color:#71528d}
 .booking-human{color:#71528d!important}
+
+/* Reserve collapsed mobile service cards before module initialization. */
+@media(max-width:700px) and (scripting:enabled){html:not(.panels-ready) .mobile-panel>:not(summary){display:none!important}html:not(.panels-ready) .mobile-panel>summary{border-bottom:0}html:not(.panels-ready) .mobile-panel>summary>b{transform:none}}
