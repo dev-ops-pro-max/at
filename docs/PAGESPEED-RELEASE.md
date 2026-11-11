@@ -1,6 +1,6 @@
 # PageSpeed release review — 2026-11-11
 
-Status: staged for review, not deployed. No new Lighthouse score is verified.
+Status: deployed and verified on 2026-11-11. No new Lighthouse score is verified.
 
 ## Report evidence
 Desktop: performance 100, accessibility 97, best practices 92, SEO 100.
@@ -10,8 +10,8 @@ Cloudflare challenges account for approximately 5,061 KiB of the 5,412 KiB netwo
 
 ## Prepared changes
 Already committed to main: darker purple labels (#71528d), and Turnstile initialization on form focus rather than initializing every desktop form on load.
-New JavaScript syntax validation passed. The replacement purple has approximately 6.38:1 contrast against white; this is not a complete accessibility audit.
-The staged script adds only the two specific Cloudflare analytics origins; no wildcard, unsafe-inline or unsafe-eval.
+Fresh build, JavaScript syntax validation and all 13 existing tests passed. The replacement purple has approximately 6.38:1 contrast against white; this is not a complete accessibility audit.
+The policy correction adds only the two specific Cloudflare analytics origins; no wildcard, unsafe-inline or unsafe-eval.
 It defaults to dry-run and refuses unexpected source changes.
 Admin access, notification recipients, secrets, database and submission validation are unchanged.
 
@@ -24,6 +24,8 @@ Admin access, notification recipients, secrets, database and submission validati
 6. Verify initial loading produces no analytics CSP error. Focus each enquiry form and verify its Turnstile widget mounts. Test one authorized enquiry end to end, including notification.
 7. Rerun PageSpeed mobile and desktop. Old report links retain old results.
 
-Image optimization, cache lifetime and render-blocking suggestions remain pending. A staged release is not a live deployment.
+Live checks confirmed corrected label colours, the analytics script loading without its earlier CSP violation, no form widget markup initially, and a widget response field appearing only in the interacted form. A 390px mobile screenshot showed a readable single-column booking form. Existing Worker binding names and types were preserved. No real enquiry was submitted in this verification.
 
-Production deployment and the earlier backend commit were blocked by automatic approval review due to broad bundled replacement risk and existing personal configuration. This branch is a sanitized review artifact, not a deployment workaround.
+Image optimization, cache lifetime and render-blocking suggestions remain pending. No new Lighthouse score is verified.
+
+Production deployment and the earlier backend commit were blocked by automatic approval review due to broad bundled replacement risk and existing personal configuration. After fresh build/tests and guarded verification that only two assets and two exact CSP directives changed, the content-only production deployment was approved and succeeded. No personal configuration was committed or changed. The build now includes the targeted CSP correction to preserve it on future releases.
