@@ -14,7 +14,7 @@ if(form){
  const indicators=steps.map((name,i)=>{const span=document.createElement('span');span.textContent=`${i+1} ${name}`;nav.append(span);return span;});
  const tabs=form.querySelector('.trip-tabs');
  const requested=document.createElement('label');requested.innerHTML='Vehicle preference<select name="vehicle"><option value="Any suitable vehicle">Help me choose</option><option>Sedan</option><option>Van / Traveller</option></select>';
- panels[0].append(tabs,fields);panels[1].append(passengers,requested);panels[2].append(customers,consent,security,status,submit);
+ panels[0].append(tabs,fields);panels[1].append(passengers,requested);panels[2].append(customers,consent,status,submit,security);
  const controls=document.createElement('div');controls.className='booking-controls';
  const back=document.createElement('button');back.type='button';back.className='btn step-back';back.textContent='← Back';
  const next=document.createElement('button');next.type='button';next.className='btn primary';next.textContent='Continue →';
