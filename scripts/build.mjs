@@ -7,7 +7,7 @@ for(const asset of Object.values(assets))if(asset.type.startsWith('text/html'))a
 
 
 // Install the requested GTM container on public marketing pages only.
-const gtmSnippet="<script async src=\"https://www.googletagmanager.com/gtm.js?id=GTM-T8V2Q4L3\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n</script>\n";
+const gtmSnippet="<script async fetchpriority=\"low\" src=\"https://www.googletagmanager.com/gtm.js?id=GTM-T8V2Q4L3\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n</script>\n";
 for(const path of ['/index.html','/contact.html','/privacy.html','/terms.html']){if(assets[path].body.includes('GTM-T8V2Q4L3'))throw new Error('Duplicate GTM installation');assets[path].body=assets[path].body.replace('<head>','<head>'+gtmSnippet);}
 assets['/privacy.html'].body=assets['/privacy.html'].body.replace('Last updated: 3 November 2026.','Last updated: 11 November 2026.').replace('This release does not add advertising trackers.','Google Tag Manager loads our configured website tags. Google receives technical connection information when its script loads. Tags configured in the container may process usage data or use cookies according to their settings. Our website code does not add enquiry names, phone numbers or trip details to the Google data layer.');
 
@@ -19,6 +19,7 @@ const cssBundle='/site-'+createHash('sha256').update(combinedCss).digest('hex').
 assets[cssBundle]={body:combinedCss,binary:false,type:'text/css; charset=utf-8'};
 for(const path of cssPaths){const pattern=new RegExp('<link rel="stylesheet" href="'+path.replaceAll('.','\\.')+'[^" ]*">');if(!pattern.test(assets['/index.html'].body))throw new Error('Missing stylesheet: '+path);assets['/index.html'].body=assets['/index.html'].body.replace(pattern,path===cssPaths[0]?'<link rel="stylesheet" href="'+cssBundle+'">':'');}
 assets['/index.html'].body=assets['/index.html'].body.replace(/(<details class="mobile-panel" id="[^"]+") open/g,'$1');
+assets['/index.html'].body=assets['/index.html'].body.replace('<head>','<head>'+"<link rel=\"preload\" as=\"image\" href=\"/images/chennai-traveller-720.webp\" imagesrcset=\"/images/chennai-traveller-480.webp 480w, /images/chennai-traveller-720.webp 720w, /images/chennai-traveller.webp 1100w\" imagesizes=\"(max-width:700px) calc(100vw - 56px), (max-width:1000px) 44vw, 560px\" fetchpriority=\"high\">");
 assets['/index.html'].body=assets['/index.html'].body.replace('class="hero-photo"','class="hero-photo" srcset="/images/chennai-traveller-480.webp 480w, /images/chennai-traveller-720.webp 720w, /images/chennai-traveller.webp 1100w" sizes="(max-width:700px) calc(100vw - 56px), (max-width:1000px) 44vw, 560px"');
 
 await mkdir('dist',{recursive:true});await writeFile('src/generated-assets.js','export const assets='+JSON.stringify(assets)+';\n');let source=optimizePhotoReferences(await readFile('src/worker.js','utf8'));
