@@ -7,7 +7,7 @@ for(const asset of Object.values(assets))if(asset.type.startsWith('text/html'))a
 
 
 // Install the requested GTM container on public marketing pages only.
-const gtmSnippet="<script async fetchpriority=\"low\" src=\"https://www.googletagmanager.com/gtm.js?id=GTM-T8V2Q4L3\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n</script>\n";
+const gtmSnippet="<script src=\"/tag-manager.js\" defer></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n</script>\n";
 for(const path of ['/index.html','/contact.html','/privacy.html','/terms.html']){if(assets[path].body.includes('GTM-T8V2Q4L3'))throw new Error('Duplicate GTM installation');assets[path].body=assets[path].body.replace('<head>','<head>'+gtmSnippet);}
 assets['/privacy.html'].body=assets['/privacy.html'].body.replace('Last updated: 3 November 2026.','Last updated: 11 November 2026.').replace('This release does not add advertising trackers.','Google Tag Manager loads our configured website tags. Google receives technical connection information when its script loads. Tags configured in the container may process usage data or use cookies according to their settings. Our website code does not add enquiry names, phone numbers or trip details to the Google data layer.');
 
