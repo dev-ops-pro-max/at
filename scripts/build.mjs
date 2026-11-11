@@ -4,7 +4,16 @@ const optimizedPhotos=['chennai-traveller','chennai-sedan','car-interior','trave
 function optimizePhotoReferences(text){for(const name of optimizedPhotos){if(!assets['/images/'+name+'.webp'])throw new Error('Missing optimized photo: '+name);text=text.replaceAll(name+'.jpg',name+'.webp');}return text;}
 for(const asset of Object.values(assets))if(asset.type.startsWith('text/html'))asset.body=optimizePhotoReferences(asset.body);
 
+
+// Install the requested GTM container on public marketing pages only.
+const gtmSnippet="<script async src=\"https://www.googletagmanager.com/gtm.js?id=GTM-T8V2Q4L3\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n</script>\n";
+for(const path of ['/index.html','/contact.html','/privacy.html','/terms.html']){if(assets[path].body.includes('GTM-T8V2Q4L3'))throw new Error('Duplicate GTM installation');assets[path].body=assets[path].body.replace('<head>','<head>'+gtmSnippet);}
+assets['/privacy.html'].body=assets['/privacy.html'].body.replace('Last updated: 3 November 2026.','Last updated: 11 November 2026.').replace('This release does not add advertising trackers.','Google Tag Manager loads our configured website tags. Google receives technical connection information when its script loads. Tags configured in the container may process usage data or use cookies according to their settings. Our website code does not add enquiry names, phone numbers or trip details to the Google data layer.');
+
 await mkdir('dist',{recursive:true});await writeFile('src/generated-assets.js','export const assets='+JSON.stringify(assets)+';\n');let source=optimizePhotoReferences(await readFile('src/worker.js','utf8'));
 // Keep the verified production analytics CSP fix in repeatable releases.
 for(const [before,after] of [["script-src 'self' https://challenges.cloudflare.com;","script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com;"],["connect-src 'self' https://challenges.cloudflare.com;","connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com;"]]){if(source.includes(after))continue;if(source.split(before).length!==2)throw new Error('Unexpected CSP: review analytics policy before deployment.');source=source.replace(before,after);}
+
+const gtmPolicyChanges=[["script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com;", "script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://www.googletagmanager.com 'sha256-jYHg7tXSuuVUqjy+JeRT8vyG97+Spkw5IFHdQEBbmrw=';"],["connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com;", "connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com https://www.googletagmanager.com;"]];
+for(const [before,after] of gtmPolicyChanges){if(source.split(before).length!==2)throw new Error('Unexpected GTM CSP directive');source=source.replace(before,after);}
 await writeFile('dist/worker.mjs',source.replace("import { assets } from './generated-assets.js';",'const assets='+JSON.stringify(assets)+';'));console.log('Built Worker with '+Object.keys(assets).length+' embedded assets.');
