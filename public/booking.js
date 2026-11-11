@@ -7,6 +7,7 @@ const dialog=document.getElementById('quote-dialog');let pendingKeys=new WeakMap
 function show(message,reference=''){document.getElementById('quote-summary').textContent=message;document.getElementById('reference').textContent=reference?'Reference: '+reference:'';document.getElementById('send-whatsapp').href=whatsappUrl(`Hello Perumal, enquiry ${reference||''}\n${message}`);dialog.showModal();}
 document.getElementById('close-dialog')?.addEventListener('click',()=>dialog.close());
 const forms=[...document.querySelectorAll('[data-enquiry-kind]')];
+for(const form of forms){const holder=form.querySelector('.turnstile');const submit=form.querySelector('.trip-submit-row')||form.querySelector('[type="submit"]');if(holder&&submit)submit.after(holder);if(holder){holder.style.minHeight='0';holder.style.margin='8px 0';}}
 const mobilePanels=[...document.querySelectorAll('details.mobile-panel')];
 const mobileLayout=window.matchMedia('(max-width:700px)');
 const chooser=document.querySelector('.mobile-choices');
@@ -30,7 +31,7 @@ function setPanelLayout(){
 setPanelLayout();
 window.addEventListener('hashchange',()=>openPanel(panelFromHash()));
 const scrollBehavior=()=>window.matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth';
-function mountWidgets(){if(!window.turnstile){setTimeout(mountWidgets,300);return;}for(const form of forms){if(form.widget!==undefined)continue;const panel=form.closest('details.mobile-panel');if(panel&&!panel.open)continue;const holder=form.querySelector('.turnstile');form.widget=window.turnstile.render(holder,{sitekey:holder.dataset.sitekey,action:'enquiry',size:holder.clientWidth<300?'compact':'flexible'});}}
+function mountWidgets(){if(!window.turnstile){setTimeout(mountWidgets,300);return;}for(const form of forms){if(form.widget!==undefined)continue;const panel=form.closest('details.mobile-panel');if(panel&&!panel.open)continue;const holder=form.querySelector('.turnstile');form.widget=window.turnstile.render(holder,{sitekey:holder.dataset.sitekey,action:'enquiry',appearance:'interaction-only',theme:'light',size:holder.clientWidth<300?'compact':'flexible'});}}
 for(const panel of mobilePanels)panel.addEventListener('toggle',()=>{if(mobileLayout.matches&&panel.open)for(const other of mobilePanels)if(other!==panel)other.open=false;mountWidgets();});
 mobileLayout.addEventListener('change',setPanelLayout);
 document.querySelectorAll('a[data-panel-target]').forEach(link=>link.addEventListener('click',()=>{if(!mobileLayout.matches)return;openPanel(document.getElementById(link.dataset.panelTarget));}));
