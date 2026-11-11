@@ -48,3 +48,37 @@ Mobile FCP 0.9s, LCP 2.1s, TBT 0ms, CLS 0, Speed Index 4.0s. Desktop FCP 0.2s, L
 Report: https://pagespeed.web.dev/analysis/https-amaravathitravels-com/8cqqyin6aq?form_factor=desktop
 
 Remaining suggestions: responsive image sizing/compression (estimated 75 KiB mobile, 126 KiB desktop), render-blocking CSS, and cache lifetimes (estimated 33 KiB). No claim of complete security or manual accessibility coverage follows from Lighthouse scores.
+
+## Mobile follow-up release — 2026-11-11 11:14 UTC
+
+Deployed responsive hero variants (480px: 22,656 bytes; 720px: 45,144 bytes; original 1100px: 91,536 bytes), with srcset/sizes and responsive high-priority preload. High-density screens can still choose the original. Consolidated the four homepage CSS files into one content-named bundle, preserving their exact cascade order. Existing individual styles remain available.
+
+Mobile service-card content is hidden during JavaScript startup only in scripting-enabled small viewports. Booking initialization then adds panels-ready after setting the correct panel state. Server markup remains open for desktop and non-JavaScript fallback; desktop initialization continues opening all five panels. This avoids mobile startup collapse shifts without introducing desktop opening shifts.
+
+The published GA4 tag added startup work and attempted collection through blocked CSP endpoints. Path-limited GA collection endpoints were added to connect-src. Tag Manager now loads once after page load/two animation frames at browser idle, or earlier on pointer/keyboard interaction. Very brief visits may not be counted. No enquiry handling, database or authentication logic was changed.
+
+Validation:
+- Build and syntax checks passed; all 13 existing tests passed.
+- Idle-loader mocked execution passed both idle and early-interaction paths with one container insertion.
+- New photo and CSS asset HTTP checks passed, with correct content types.
+- Package checks verified identical CSS rule content/order, responsive photo references and analytics policy.
+- 390x844 mobile screenshots inspected for hero, booking and corporate form layout.
+- Desktop runtime check showed all five service panels open and the Google container eventually loaded.
+- An intermediate audit failed to load the new stylesheet and was not accepted as final evidence. Current CSS was independently confirmed HTTP 200/text-css, and a subsequent completed audit below verifies both views.
+
+| Category | Mobile | Desktop |
+| --- | ---: | ---: |
+| Performance | 98 | 100 |
+| Accessibility | 100 | 100 |
+| Best practices | 100 | 100 |
+| SEO | 100 | 100 |
+
+Mobile FCP 0.9s, LCP 2.4s, TBT rounded 10ms, CLS 0, Speed Index 0.9s.
+Desktop FCP 0.2s, LCP 0.5s, TBT rounded 10ms, CLS 0.032, Speed Index 0.4s.
+These are lab measurements, not field data or a promise of identical scores on every run. The earlier 97 mobile result preceded GA4 installation and is not an identical analytics configuration.
+
+Final report:
+https://pagespeed.web.dev/analysis/https-amaravathitravels-com/rjrebm7kd5?form_factor=mobile
+https://pagespeed.web.dev/analysis/https-amaravathitravels-com/rjrebm7kd5?form_factor=desktop
+
+Further cache policy work, responsive sizing for secondary fleet photos, and CSS removal remain optional optimizations. No new real enquiry was submitted during this follow-up. GA4 Realtime receipt and account-side user-provided-data settings remain unverified.
