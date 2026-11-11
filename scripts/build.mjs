@@ -18,7 +18,6 @@ const combinedCss=cssPaths.map(path=>assets[path].body).join('\n');
 const cssBundle='/site-'+createHash('sha256').update(combinedCss).digest('hex').slice(0,12)+'.css';
 assets[cssBundle]={body:combinedCss,binary:false,type:'text/css; charset=utf-8'};
 for(const path of cssPaths){const pattern=new RegExp('<link rel="stylesheet" href="'+path.replaceAll('.','\\.')+'[^" ]*">');if(!pattern.test(assets['/index.html'].body))throw new Error('Missing stylesheet: '+path);assets['/index.html'].body=assets['/index.html'].body.replace(pattern,path===cssPaths[0]?'<link rel="stylesheet" href="'+cssBundle+'">':'');}
-assets['/index.html'].body=assets['/index.html'].body.replace(/(<details class="mobile-panel" id="[^"]+") open/g,'$1');
 assets['/index.html'].body=assets['/index.html'].body.replace('<head>','<head>'+"<link rel=\"preload\" as=\"image\" href=\"/images/chennai-traveller-720.webp\" imagesrcset=\"/images/chennai-traveller-480.webp 480w, /images/chennai-traveller-720.webp 720w, /images/chennai-traveller.webp 1100w\" imagesizes=\"(max-width:700px) calc(100vw - 56px), (max-width:1000px) 44vw, 560px\" fetchpriority=\"high\">");
 assets['/index.html'].body=assets['/index.html'].body.replace('class="hero-photo"','class="hero-photo" srcset="/images/chennai-traveller-480.webp 480w, /images/chennai-traveller-720.webp 720w, /images/chennai-traveller.webp 1100w" sizes="(max-width:700px) calc(100vw - 56px), (max-width:1000px) 44vw, 560px"');
 
