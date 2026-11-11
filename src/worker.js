@@ -23,6 +23,13 @@ page=page.replace(/<div class="fleet-grid">[\s\S]*?<\/div><p class="fine-print">
 const packages=rows.filter(r=>r.kind==='package').map((r,i)=>`<article class="package ${['coast','pondy','temple'][i%3]}"><div class="destination-icon">${['≈','☀','✦'][i%3]}</div><span class="tag">YOUR NEXT JOURNEY</span><h3>${escapeHtml(r.title)}</h3><p>${escapeHtml(r.description)}</p><p class="package-detail">${escapeHtml(r.details)}</p><p>${escapeHtml(r.price)}</p><button data-enquire="${escapeHtml(r.title)}">Ask for a package ↗</button></article>`).join('');
 page=page.replace(/<div class="package-grid">[\s\S]*?<\/div><div class="tariff-note">/,`<div class="package-grid">${packages}</div><div class="tariff-note">`);
 return page.replaceAll('__TURNSTILE_SITEKEY__',escapeHtml(sitekey||''));}
+
+export async function notifyEnquiry(env,data,reference){
+ if(!env.RESEND_API_KEY){console.warn(JSON.stringify({event:'enquiry_email_not_configured',reference}));return false;}
+ const text='New '+data.kind+' enquiry\nReference: '+reference+'\nName: '+data.name+'\nPhone: '+data.phone+'\n\n'+data.details+'\n\nReview in https://amaravathitravels.com/admin';
+ try{const response=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:'Bearer '+env.RESEND_API_KEY,'Content-Type':'application/json','Idempotency-Key':'enquiry-'+reference},body:JSON.stringify({from:'Amaravathi Travels <help@amaravathitravels.com>',to:[approved],subject:'New '+data.kind+' enquiry — '+reference,text,html:'<pre>'+escapeHtml(text)+'</pre>'}),signal:AbortSignal.timeout(10000)});console.log(JSON.stringify({event:response.ok?'enquiry_email_accepted':'enquiry_email_failed',reference,status:response.status}));return response.ok;}catch{console.error(JSON.stringify({event:'enquiry_email_failed',reference}));return false;}
+}
+
 async function handle(request,env,ctx){const url=new URL(request.url),path=url.pathname.replace(/\/+$/,'')||'/';
  if(url.protocol==='http:'&&url.hostname!=='localhost'&&url.hostname!=='127.0.0.1'){url.protocol='https:';return Response.redirect(url.toString(),308);}
  if(path==='/healthz')return json({status:'ok',service:'amaravathi-travels',release:env.RELEASE_SHA||'local'});
@@ -35,8 +42,8 @@ async function handle(request,env,ctx){const url=new URL(request.url),path=url.p
   let body,data;try{body=await readJson(request);data=validateEnquiry(body);}catch(e){return json({error:e.message},400);}
   if(!await verifyBot(request,env,body.token))return json({error:'Verification failed. Please complete the security check again.'},403);
   const id='AT-'+crypto.randomUUID().toUpperCase();
-  await env.DB.prepare('INSERT INTO enquiries(id,idempotency_key,kind,name,phone,details) VALUES(?,?,?,?,?,?) ON CONFLICT(idempotency_key) DO NOTHING').bind(id,data.key,data.kind,data.name,data.phone,data.details).run();
-  const row=await env.DB.prepare('SELECT id FROM enquiries WHERE idempotency_key=?').bind(data.key).first();return json({reference:row.id,message:'Enquiry received. Availability and pricing require confirmation.'},201);
+  const inserted=await env.DB.prepare('INSERT INTO enquiries(id,idempotency_key,kind,name,phone,details) VALUES(?,?,?,?,?,?) ON CONFLICT(idempotency_key) DO NOTHING').bind(id,data.key,data.kind,data.name,data.phone,data.details).run();
+  const row=await env.DB.prepare('SELECT id FROM enquiries WHERE idempotency_key=?').bind(data.key).first();if(inserted.meta?.changes&&env.RESEND_API_KEY){const notification=notifyEnquiry(env,data,row.id);if(ctx?.waitUntil)ctx.waitUntil(notification);else await notification;}return json({reference:row.id,message:'Enquiry received. Availability and pricing require confirmation.'},201);
  }
  if(path==='/admin'||path.startsWith('/admin/')){
   const actor=await requireAdmin(ctx,env);if(!actor)return json({error:'Staff sign-in required'},403);
