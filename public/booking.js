@@ -29,6 +29,7 @@ function setPanelLayout(){
  if(mobileLayout.matches)openPanel(panelFromHash());
 }
 setPanelLayout();
+document.documentElement.classList.add('panels-ready');
 window.addEventListener('hashchange',()=>openPanel(panelFromHash()));
 const scrollBehavior=()=>window.matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth';
 function mountWidgets(){if(!window.turnstile){setTimeout(mountWidgets,300);return;}for(const form of forms){if(form.widget!==undefined||form.dataset.securityActive!=='true')continue;const panel=form.closest('details.mobile-panel');if(panel&&!panel.open)continue;const holder=form.querySelector('.turnstile');form.widget=window.turnstile.render(holder,{sitekey:holder.dataset.sitekey,action:'enquiry',appearance:'interaction-only',theme:'light',size:holder.clientWidth<300?'compact':'flexible'});}}
